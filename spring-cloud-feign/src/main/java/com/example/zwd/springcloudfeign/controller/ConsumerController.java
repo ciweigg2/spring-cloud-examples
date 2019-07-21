@@ -13,7 +13,7 @@ public class ConsumerController {
     ConsumerService consumerService;
 
     @GetMapping(value = "hello/{name}")
-    public String hello(@PathVariable String name) {
+    public String hello(@PathVariable String name) throws Exception {
         return consumerService.hello(name);
     }
 }

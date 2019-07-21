@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface ConsumerService {
 
     @GetMapping(value = "hello/{name}")
-    String hello(@PathVariable("name") String name);
+    String hello(@PathVariable("name") String name) throws Exception;
 
 }

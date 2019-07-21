@@ -7,7 +7,11 @@ import org.springframework.web.bind.annotation.*;
 public class ConsumerController {
 
     @GetMapping(value = "hello/{name}")
-    public String hello(@PathVariable String name) {
+    public String hello(@PathVariable String name) throws Exception {
+
+        if(name.equals("exception")){
+            throw new Exception("不能使用这个参数");
+        }
 
         System.out.println( "hello "+name+"!");
 
