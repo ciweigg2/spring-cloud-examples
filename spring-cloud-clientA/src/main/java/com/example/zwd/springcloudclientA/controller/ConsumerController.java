@@ -1,8 +1,7 @@
 package com.example.zwd.springcloudclientA.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.zwd.springcloudclientA.model.User;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ConsumerController {
@@ -14,4 +13,29 @@ public class ConsumerController {
 
         return "success";
     }
+
+    @PostMapping(value = "hello/json")
+    public User helloJson(@RequestBody User user) throws Exception {
+
+        if(user.getName().equals("exception")){
+            throw new Exception("exception");
+        }
+
+        System.out.println( "hello "+user.getName()+"!");
+
+        return user;
+    }
+
+    @PostMapping(value = "hello/form")
+    public String helloForm(User user) throws Exception {
+
+        if(user.getName().equals("exception")){
+            throw new Exception("exception");
+        }
+
+        System.out.println( "hello "+user.getName()+"!");
+
+        return "success";
+    }
+
 }

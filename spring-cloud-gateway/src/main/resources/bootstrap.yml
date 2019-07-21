@@ -1,0 +1,117 @@
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: nacos_route
+#          uri: http://ityouknow.com
+#          predicates:
+#          - Path=/nacos/**
+#        - id: users_route
+#          uri: lb://eureka-client-a
+#          predicates:
+#          - Path=/users/**
+
+# 博客教程呀
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: neo_route
+#          uri: http://www.ityouknow.com
+#          predicates:
+#            - Path=/spring-cloud
+#      - id: time_route
+#        uri: http://ityouknow.com
+#        predicates:
+#        - After=2018-01-20T06:06:06+08:00[Asia/Shanghai]
+#        - Before=2018-01-20T06:06:06+08:00[Asia/Shanghai]
+#        - Between=2018-01-20T06:06:06+08:00[Asia/Shanghai], 2019-01-20T06:06:06+08:00[Asia/Shanghai]
+#      - id: cookie_route
+#        uri: http://ityouknow.com
+#        predicates:
+#        - Cookie=ityouknow, kee.e
+#      - id: header_route
+#        uri: http://ityouknow.com
+#        predicates:
+#        - Header=X-Request-Id, \d+
+#      - id: host_route
+#        uri: http://ityouknow.com
+#        predicates:
+#        - Host=**.ityouknow.com
+#      - id: method_route
+#        uri: http://ityouknow.com
+#        predicates:
+#        - Method=GET
+#      - id: host_route
+#        uri: http://ityouknow.com
+#        predicates:
+#        - Path=/foo/{segment}
+#      - id: query_route
+#        uri: http://ityouknow.com
+#        predicates:
+#         - Query=keep, pu.
+#      - id: remoteaddr_route
+#        uri: http://ityouknow.com
+#        predicates:
+#        - RemoteAddr=192.168.126.218/24
+
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: nameRoot
+#          uri: lb://eureka-client-a
+#          predicates:
+#            - Path=/**
+#          filters:
+#            - PrefixPath=/hello
+
+#spring:
+#  redis:
+#    host: 127.0.0.1
+#    password:
+#    port: 6379
+#  cloud:
+#    gateway:
+#      discovery:
+#        locator:
+#          enabled: true
+#      routes:
+#        - id: requestratelimiter_route
+#          uri: lb://eureka-client-a
+#          filters:
+#            - name: RequestRateLimiter
+#              args:
+#                redis-rate-limiter.replenishRate: 2
+#                redis-rate-limiter.burstCapacity: 3
+#                key-resolver: "#{@hostAddrKeyResolver}"
+#          predicates:
+#            - Method=GET
+
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: hystrix_route
+#          uri: lb://eureka-client-a
+#          predicates:
+#            - Path=/hello/**
+#          filters:
+#            - name: Hystrix
+#              args:
+#                name: fallbackcmd
+#                fallbackUri: forward:/incaseoffailureusethis
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: retry_test
+          uri: lb://eureka-client-a
+          predicates:
+            - Path=/hello/**
+#          filters:
+#            - name: Retry
+#              args:
+#                retries: 3
+#                statuses: BAD_GATEWAY
